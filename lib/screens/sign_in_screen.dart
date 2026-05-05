@@ -12,15 +12,13 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
-   final _emailController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   bool _isPasswordVisible = false;
 
-
   String _errorMessage = '';
-
 
   void _signIn() async {
     if (!_formKey.currentState!.validate()) {
@@ -38,7 +36,6 @@ class _SignInScreenState extends State<SignInScreen> {
       //   MaterialPageRoute(builder: (context) => const HomeScreen()),
       // );
 
-
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -53,20 +50,17 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
   }
 
-
   bool _isValidEmail(String email) {
     String emailRegex =
         r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zAZ0-9-]+)*$";
     return RegExp(emailRegex).hasMatch(email);
   }
-
 
   String _getAuthErrorMessage(String code) {
     switch (code) {
@@ -82,9 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign In'),
-      ),
+      appBar: AppBar(title: const Text('Sign In')),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -93,9 +85,7 @@ class _SignInScreenState extends State<SignInScreen> {
               key: _formKey,
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 32.0,
-                  ),
+                  const SizedBox(height: 32.0),
                   TextFormField(
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
@@ -113,9 +103,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
+                  const SizedBox(height: 16.0),
                   TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
@@ -143,22 +131,20 @@ class _SignInScreenState extends State<SignInScreen> {
                       return null;
                     },
                   ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
+                  const SizedBox(height: 16.0),
                   _isLoading
                       ? const CircularProgressIndicator()
                       : ElevatedButton(
                           onPressed: _signIn,
                           child: const Text('Sign In'),
                         ),
-                  const SizedBox(
-                    height: 32.0,
-                  ),
+                  const SizedBox(height: 32.0),
                   RichText(
                     text: TextSpan(
-                      style:
-                          const TextStyle(fontSize: 16.0, color: Colors.black),
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.black,
+                      ),
                       text: 'Don\'t have an account? ',
                       children: [
                         TextSpan(
@@ -179,8 +165,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ],
                     ),
-                  )
-               
+                  ),
                 ],
               ),
             ),
