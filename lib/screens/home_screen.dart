@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_fasum/screens/add_post_screen.dart';
+import 'package:flutter_application_fasum/screens/detail_screen.dart';
 import 'package:flutter_application_fasum/screens/full_screen_image.dart';
 import 'package:flutter_application_fasum/screens/sign_in_screen.dart';
 import 'package:intl/intl.dart';
@@ -87,7 +88,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     'fasum-image-${createdAt.millisecondsSinceEpoch}';
 
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailScreen(
+                          imageBase64: imageBase64,
+                          description: description ?? '',
+                          createdAt: createdAt,
+                          fullName: fullName,
+                          latitude: (latitude ?? 0).toDouble(),
+                          longitude: (longitude ?? 0).toDouble(),
+                          category: category,
+                          heroTag: heroTag,
+                        ),
+                      ),
+                    );
+                  },
                   child: Card(
                     elevation: 1,
                     color: Theme.of(context).colorScheme.surfaceContainerLow,
