@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_fasum/screens/full_screen_image.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -55,17 +56,41 @@ class _DetailScreenState extends State<DetailScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Hero(
-            tag: widget.heroTag,
-            child: Container(
-              width: double.infinity,
-              height: 250,
-              color: Colors.black,
-              child: Image.memory(
-                base64Decode(widget.imageBase64),
-                fit: BoxFit.contain,
+          Stack(
+            children: [
+              Hero(
+                tag: widget.heroTag,
+                child: Container(
+                  width: double.infinity,
+                  height: 250,
+                  color: Colors.black,
+                  child: Image.memory(
+                    base64Decode(widget.imageBase64),
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                top: 12,
+                right: 12,
+                child: IconButton(
+                  icon: const Icon(Icons.fullscreen, color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => FullScreenImage(
+                          imageBase64: widget.imageBase64,
+                          heroTag: widget.heroTag,
+                        ),
+                      ),
+                    );
+                  },
+                  tooltip: 'Lihat gambar penuh',
+                  style: IconButton.styleFrom(backgroundColor: Colors.black45),
+                ),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),

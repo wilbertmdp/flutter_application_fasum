@@ -17,16 +17,22 @@ class FullScreenImage extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 10,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Center(
-        child: Hero(
-          tag: heroTag,
-          child: InteractiveViewer(
-            minScale: 1,
-            maxScale: 5,
-            child: Image.memory(base64Decode(imageBase64), fit: BoxFit.contain),
+      body: GestureDetector(
+        onTap: () => Navigator.pop(context),
+        child: Center(
+          child: Hero(
+            tag: heroTag,
+            child: InteractiveViewer(
+              minScale: 1,
+              maxScale: 5,
+              child: Image.memory(
+                base64Decode(imageBase64),
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
         ),
       ),
